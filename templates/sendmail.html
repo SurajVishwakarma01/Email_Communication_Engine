@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<h1 class="h1">Send Mail: </h1>
+<hr class="bg-success">
+{{x}} {{y}} {{z}} {{a}} {{b}} {{c}}
+<div class="shadow p-3">
+     <div class="row">
+         <div class="col-sm-8">
+             <form class="form-group" method="post" action="/hitmail">
+                 <div class="row">
+                     <div class="col-sm"></div>
+                     <div class="col-sm">
+                         <span><b>Set Reminder:</b></span><input class="form-control" name="rimtime" type="datetime-local"><br>
+                     </div>
+                 </div>
+                 <input class="form-control" type="text"  name="name" value="{{name}}"><br>
+                 <input class="form-control" type="text"  name="tomail" value="{{mail}}"><br>
+                 <input class="form-control" type="text"  name="subject" placeholder="Subject:" required><br>
+                 <textarea class="form-control" name="editor1">{{selected_temp.Body}}</textarea>
+                 <div class="row">
+                     <div class="col-sm-4 pt-2">
+                        <input type="checkbox" id="tampid" onclick="showinput();" name="onsave" value="Bike">
+                            <label for="tampid"> Save as a Template.</label><br>
+
+                     </div>
+                     <div class="col-sm-8 pt-1">
+                         <input class="form-control tampname d-none" type="text" name="templatename" placeholder="Template Name:"  >
+                     </div>
+                 </div>
+                 <p class="text-right"><button class="btn btn-success btm-sm" type="submit" > Send </button>
+
+             </form>
+         </div>
+         <div class="col-sm-4">
+             <h5 class="h5">Mail Templates</h5>
+             <hr class="bg-success">
+              {% for template in allmails %}
+             <a class="text-success" href="/sendemails/{{name}}/{{mail}}/{{template.Tem_Id}}"> {{loop.index}}: {{template.Sub}}</a><br>
+             {% endfor %}
+         </div>
+     </div>
+
+</div>
+
+
+
+{% endblock %}
