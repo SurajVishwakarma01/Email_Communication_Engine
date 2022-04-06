@@ -30,29 +30,8 @@
     </tr>
   </thead>
   <tbody>
-    {% for ec in allec %}
-    <tr>
-      <th scope="row">{{loop.index}}</th>
-      <td>{{ec.Student_Name}}</td>
-      <td>{{ec.Email_Id}}</td>
-      <td>{{ec.Contact_No}}</td>
-      <td>{{ec.Stream_Allocated}}</td>
-      <td>
-          <a href="/sendemails/{{ec.Student_Name}}/{{ec.Email_Id}}/template" type="button" class="btn btn-outline-danger btn-sm mx-1" >Send Mail</a>
-<!--          <a href="#" type="button" class="btn btn-outline-success btn-sm mx-1">Remainder</button>-->
-<!--              <button type="button" class="btn btn-outline-success btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal{{ec.Sno}}">-->
-<!--  Remainder-->
-<!--</button>-->
-
-      </td>
-    </tr>
-
-
-
-<!-- Modal -->
-
-   {% endfor %}
-
+ 
+ 
 
 
 
