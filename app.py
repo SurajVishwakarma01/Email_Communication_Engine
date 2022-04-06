@@ -73,7 +73,7 @@ def home():
 @app.route('/registeredstudents', methods=['GET', 'POST'])
 def registeredstudents():
     #if g.user:
-        #allec = EC.query.all()
+    allec = EC.query.all()
     return render_template('registeredstudents.html')
     #return redirect(url_for('index'))
 
