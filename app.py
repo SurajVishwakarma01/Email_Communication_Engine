@@ -15,9 +15,9 @@ import os
 # creating app as a reference
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@localhost/e_comm"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@localhost/e_comm"
 # congiguring database i.e connecting databse
-# app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
