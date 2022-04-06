@@ -1,3 +1,4 @@
+# Importing modules required these project
 from flask import Flask, render_template, redirect, session, url_for, g, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from threading import Thread
@@ -11,16 +12,19 @@ import time
 
 import os
 
+# creating app as a reference
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@localhost/e_comm"
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@localhost/e_comm"
+# congiguring database i.e connecting databse
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 app.secret_key = os.urandom(24)
 
 
+# creating Ec table in the database
 class EC(db.Model):
     Sno = db.Column(db.Integer, primary_key=True)
     Student_Name = db.Column(db.String(200), nullable=False)
@@ -32,6 +36,7 @@ class EC(db.Model):
         return f"{self.Sno} - {self.Student_Name}"
 
 
+# creating Templates table into database
 class Templates(db.Model):
     Tem_Id = db.Column(db.Integer, primary_key=True)
     Sub = db.Column(db.String(1000), nullable=False)
@@ -41,6 +46,7 @@ class Templates(db.Model):
         return f"{self.Tem_Id} - {self.Sub}"
 
 
+# Admin login page
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
@@ -54,6 +60,7 @@ def index():
     return render_template('index.html')
 
 
+# Home page i.e Admin Dashboard
 @app.route('/home')
 def home():
     if g.user:
@@ -62,6 +69,7 @@ def home():
     return redirect(url_for('index'))
 
 
+# fetching the data of all the registered students and rendering it into registered students.html page
 @app.route('/registeredstudents', methods=['GET', 'POST'])
 def registeredstudents():
     if g.user:
@@ -70,6 +78,7 @@ def registeredstudents():
     return redirect(url_for('index'))
 
 
+# selecting mails templates
 @app.route('/sendemails/<string:name>/<string:mail>/<string:templateid>', methods=['GET', 'POST'])
 def sendemails(name, mail, templateid):
     allmails = Templates.query.all()
@@ -78,6 +87,7 @@ def sendemails(name, mail, templateid):
     return render_template('sendmail.html', name=name, mail=mail, allmails=allmails, selected_temp=selected_temp)
 
 
+# sending bulks mail logic
 @app.route('/sendbuklemails/<string:templateid>', methods=['GET', 'POST'])
 def sendbulkemails(templateid):
     allmails = Templates.query.all()
@@ -86,6 +96,7 @@ def sendbulkemails(templateid):
     return render_template('sendbulkmail.html', allmails=allmails, selected_temp=selected_temp)
 
 
+# Seding Individual Mails
 @app.route('/hitmail', methods=['GET', 'POST'])
 def hitmail():
     if g.user:
@@ -97,15 +108,15 @@ def hitmail():
                     self.subject = request.form['subject']
                     self.emailbody = request.form['editor1']
                     remtime = request.form['rimtime']
-                    if(remtime):
+                    if (remtime):
                         rtime = remtime.replace("T", "-")
                         self.y, self.m, self.d, h_all = str(rtime).split('-')
-                        self.h, self.min= h_all.split(':')
+                        self.h, self.min = h_all.split(':')
                         self.s = 00
                     else:
                         self.m, self.d, self.y, h_all = str(time.strftime('%m %d %Y %H:%M:%S')).split(' ')
-                        self.h, self.min, self.s =h_all.split(':')
-                        self.min=int(self.min)+1
+                        self.h, self.min, self.s = h_all.split(':')
+                        self.min = int(self.min) + 1
                         self.s = 00
 
                     if request.form.get('onsave'):
@@ -136,6 +147,7 @@ def hitmail():
     return redirect(url_for('registeredstudents'))
 
 
+# Sending Bulk mail by using the for loop at line 179-180
 @app.route('/hitbulkmail', methods=['GET', 'POST'])
 def hitbulkmail():
     if g.user:
@@ -163,11 +175,9 @@ def hitbulkmail():
                         db.session.commit()
 
                     self.allec = EC.query.all()
-                    self.mailx=[]
+                    self.mailx = []
                     for ec in self.allec:
                         self.mailx.append(ec.Email_Id)
-
-
 
                 def run(self):
                     msg = EmailMessage()
@@ -191,6 +201,7 @@ def hitbulkmail():
     return redirect(url_for('registeredstudents'))
 
 
+# setting remainder to send the mail
 @app.route('/remainder', methods=['GET', 'POST'])
 def remainder():
     if g.user:
@@ -236,11 +247,12 @@ def remainder():
     return redirect(url_for('registeredstudents'))
 
 
-@app.route('/templates')
-def templates():
-    return render_template('templates.html')
+# @app.route('/templates')
+# def templates():
+#     return render_template('templates.html')
 
 
+# it will run before any request is made to the server
 @app.before_request
 def before_request():
     g.user = None
@@ -249,6 +261,7 @@ def before_request():
         g.user = session['user']
 
 
+# the sesssion will drop here
 @app.route('/dropsession')
 def dropsession():
     session.pop('user', None)
@@ -256,4 +269,4 @@ def dropsession():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run()
