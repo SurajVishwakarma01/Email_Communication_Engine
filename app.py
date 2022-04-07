@@ -15,9 +15,9 @@ import os
 # creating app as a reference
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://learnejo_x:learnejo_x@s483.bom7.mysecurecloudhost.com/ec"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://learnejo_x:learnejo_x@s483.bom7.mysecurecloudhost.com/ec"
 #congiguring database i.e connecting databse
-#app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://oocbinqhrvchbv:8883cf8c8eebeea06004d6d245775a0e2af6ea47e8658af364ef804676a2970c@ec2-52-21-136-176.compute-1.amazonaws.com:5432/dfch5qs8n1rrjs"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -72,10 +72,10 @@ def home():
 # fetching the data of all the registered students and rendering it into registered students.html page
 @app.route('/registeredstudents', methods=['GET', 'POST'])
 def registeredstudents():
-    #if g.user:
-    allec = EC.query.all()
-    return render_template('registeredstudents.html')
-    #return redirect(url_for('index'))
+    if g.user:
+        allec = EC.query.all()
+        return render_template('registeredstudents.html',allec=allec)
+    return redirect(url_for('index'))
 
 
 # selecting mails templates
