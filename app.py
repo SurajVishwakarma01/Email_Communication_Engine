@@ -9,6 +9,8 @@ from datetime import datetime as dt
 import datetime
 
 import time
+from pytz import timezone
+# from datetime import datetime
 
 import os
 
@@ -69,7 +71,7 @@ def home():
 
 
 # fetching the data of all the registered students and rendering it into registered students.html page
-@app.route('/registeredstudents', methods=['GET', 'POST'])
+@app.route('/registeredstudents')
 def registeredstudents():
     if g.user:
         allec = EC.query.all()
@@ -162,7 +164,7 @@ def hitbulkmail():
                         self.h, self.min = h_all.split(':')
                         self.s = 00
                     else:
-                        self.m, self.d, self.y, h_all = str(time.strftime('%m %d %Y %H:%M:%S')).split(' ')
+                        self.m, self.d, self.y, h_all = str(datetime.now(timezone("Asia/Kolkata")).strftime('%m %d %Y %H:%M:%S')).split(' ')
                         self.h, self.min, self.s = h_all.split(':')
                         self.min = int(self.min) + 1
                         self.s = 00
@@ -231,7 +233,7 @@ def remainder():
                 def run(self):
                     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
                     server.login('demo72897@gmail.com', "Demo@123")
-                    send_time = datetime.datetime(self.year, self.month, self.date, self.time_t, self.minute,
+                    send_time = datetime.now(timezone("Asia/Kolkata")).datetime(self.year, self.month, self.date, self.time_t, self.minute,
                                                   self.second)
                     print(send_time)
                     time.sleep(send_time.timestamp() - time.time())
