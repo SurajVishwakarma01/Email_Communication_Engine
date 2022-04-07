@@ -72,10 +72,10 @@ def home():
 # fetching the data of all the registered students and rendering it into registered students.html page
 @app.route('/registeredstudents', methods=['GET', 'POST'])
 def registeredstudents():
-    if g.user:
-        allec = EC.query.all()
-        return render_template('registeredstudents.html',allec=allec)
-    return redirect(url_for('index'))
+    #if g.user:
+    allec = EC.query.all()
+    return render_template('registeredstudents.html',allec=allec)
+    #return redirect(url_for('index'))
 
 
 # selecting mails templates
