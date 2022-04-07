@@ -50,8 +50,7 @@ class Templates(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        session.pop('user', None)
-
+        # session.pop('user', None)
         if request.form["password"] == 'password':
             session['user'] = request.form["username"]
 
