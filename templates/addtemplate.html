@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Add Template:</h1>
+<hr class="bg-success">
+<br>
+<section class="shadow p-3 border">
+    <p><small><b>Update Details:</b></small></p>
+    <form action="/addtemplate" method="post">
+        <table>
+            <tr>
+                <td><b>Subject:</b></td>
+                <td> <input class="form-control m-2" type="text" name="Sub"  required></td>
+            </tr>
+              </table>
+             <textarea class="form-control" name="editor1"></textarea>
+
+                <p class="text-right"><button class=" btn btn-success btn-sm" type="submit">Add Template</button>
+
+
+
+    </form>
+</section>
+  {% endblock %}

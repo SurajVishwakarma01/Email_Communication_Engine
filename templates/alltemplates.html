@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block body %}
+  <body>
+     <br>
+     <h2 class="text-center h2">Email Templates - Fynd Academy</h2>
+     <hr class="bg-success">
+     <br>
+
+     <br>
+     <div class="shadow p-2  border-success">
+         <a class="btn btn-info btn-sm" href="/addtemplate">Add Template</a><br>
+    <table id="table_id" class="table table-hover border">
+  <thead>
+    <tr>
+      <th scope="col">Sno</th>
+      <th scope="col">Template Subject</th>
+      <th style="text-align: center;" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tem in allec %}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{tem.Sub}}</td>
+      <td class="text-center">
+          <a class="btn btn-success btn-sm" href="/edittemplate/{{tem.Tem_Id}}"><i class="fa fa-edit"></i></a>
+          <a class="btn btn-danger btn-sm"  href="/deletetemplate/{{tem.Tem_Id}}"><i class="fa fa-trash"></i></a>
+
+
+      </td>
+    </tr>
+
+
+
+<!-- Modal -->
+
+   {% endfor %}
+
+
+
+
+  </tbody>
+</table>
+     </div>
+  </body>
+  {% endblock %}

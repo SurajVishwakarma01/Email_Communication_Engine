@@ -7,14 +7,31 @@
 
 <div class="shadow p-3">
      <div class="row">
+         <div class="col-sm-4">
+             <h5 class="h5">Mail Templates</h5>
+             <hr class="bg-success">
+              {% for template in allmails %}
+             <a class="text-success" href="/sendbuklemails/{{template.Tem_Id}}"> >>: {{template.Sub}}</a><br>
+             {% endfor %}
+         </div>
          <div class="col-sm-8">
              <form class="form-group" method="post" action="/hitbulkmail">
                 <div class="row">
-                     <div class="col-sm"></div>
+                     <div class="col-sm"><br>
+                          <select class="form-control" name="" id="">
+                     <option value="">Select Stream</option>
+                      <option value="">JAVA Developer</option>
+                      <option value="">PHP Developer</option>
+                      <option value="">Python Developer</option>
+                         <option value="">Fresher Elit 23</option>
+                         <option value="">Fresher Velocity</option>
+                 </select>
+                     </div>
                      <div class="col-sm">
-                         <span><b>Set Reminder:</b></span><input class="form-control" name="rimtime" type="datetime-local"><br>
+                         <span><b>Set Reminder:(Select If)</b></span><input class="form-control" name="rimtime" type="datetime-local"><br>
                      </div>
                  </div>
+
                  <input class="form-control" type="text"  name="subject" placeholder="Subject:" required><br>
                  <textarea class="form-control" name="editor1">{{selected_temp.Body}}</textarea>
                  <div class="row">
@@ -31,13 +48,7 @@
 
              </form>
          </div>
-         <div class="col-sm-4">
-             <h5 class="h5">Mail Templates</h5>
-             <hr class="bg-success">
-              {% for template in allmails %}
-             <a class="text-success" href="/sendbuklemails/{{template.Tem_Id}}"> >>: {{template.Sub}}</a><br>
-             {% endfor %}
-         </div>
+
      </div>
 
 </div>

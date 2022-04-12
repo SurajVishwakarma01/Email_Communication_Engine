@@ -10,9 +10,21 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+<!--  Editor-->
   <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
     <!-- JQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--  Jquery Table-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <style>
+.hover:hover {
+  background-color: lightgreen;
+  color:yellow;
+  transition: color 1s, background-color 1s;
+}
+</style>
 </head>
 <body class="container" >
 <!--Navbar -->
@@ -66,6 +78,10 @@ function showinput() {
 }
 
   CKEDITOR.replace( 'editor1' );
+
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
   </script>
 
 

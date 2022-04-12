@@ -7,6 +7,16 @@
 {{x}} {{y}} {{z}} {{a}} {{b}} {{c}}
 <div class="shadow p-3">
      <div class="row">
+          <div class="col-sm-4">
+             <h5 class="h5">Mail Templates</h5>
+             <hr class="bg-success">
+              {% for template in allmails %}
+              <div class="p-1 hover" style="border-left:5px solid lightgreen">
+
+                  <a class="" href="/sendemails/{{name}}/{{mail}}/{{template.Tem_Id}}"> <span class="text-dark "><h4>{{loop.index}}: {{template.Sub}}</h4></span></a>
+                  </div>
+             {% endfor %}
+         </div>
          <div class="col-sm-8">
              <form class="form-group" method="post" action="/hitmail">
                  <div class="row">
@@ -33,13 +43,7 @@
 
              </form>
          </div>
-         <div class="col-sm-4">
-             <h5 class="h5">Mail Templates</h5>
-             <hr class="bg-success">
-              {% for template in allmails %}
-             <a class="text-success" href="/sendemails/{{name}}/{{mail}}/{{template.Tem_Id}}"> {{loop.index}}: {{template.Sub}}</a><br>
-             {% endfor %}
-         </div>
+
      </div>
 
 </div>

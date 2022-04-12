@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Add Student:</h1>
+<hr class="bg-success">
+<br>
+<section class="shadow p-3 border">
+    <p><small><b>Fill Student Details:</b></small></p>
+    <form action="/addstudent" method="post">
+        <table>
+            <tr>
+                <td><b>Name:</b></td>
+                <td> <input class="form-control m-2" type="text" name="Student_Name"  required></td>
+            </tr>
+            <tr>
+                 <td><b>Email Id:</b></td>
+                <td> <input class="form-control m-2" type="text" name="Email_Id" required></td>
+            </tr>
+            <tr>
+                <td><b>Contact No:</b></td>
+                <td>  <input class="form-control m-2" name="Contact_No" type="text"  required></td>
+            </tr>
+            <tr>
+            <td><b>Stream Allocated:</b></td>
+                <td><input class="form-control m-2" type="text" name="Stream_Allocated"  required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><p class="text-right"><button class=" btn btn-success btn-sm" type="submit">Add Now</button></p>
+</td>
+            </tr>
+        </table>
+
+    </form>
+</section>
+  {% endblock %}

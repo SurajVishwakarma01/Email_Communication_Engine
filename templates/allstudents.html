@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+  <body>
+     <br>
+     <h2 class="text-center h2">All Students - Fynd Academy</h2>
+     <hr class="bg-success">
+     <br>
+
+     <br>
+     <div class="shadow p-2  border-success">
+         <a class="btn btn-info btn-sm" href="/addstudent">Add Student</a><br>
+    <table id="table_id" class="table table-hover border">
+  <thead>
+    <tr>
+      <th scope="col">Sno</th>
+      <th scope="col">Student_Name</th>
+      <th scope="col">Email_Id</th>
+      <th scope="col">Contact_No</th>
+      <th scope="col">Stream_Allocated</th>
+      <th style="text-align: center;" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ec in allec %}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{ec.Student_Name}}</td>
+      <td>{{ec.Email_Id}}</td>
+      <td>{{ec.Contact_No}}</td>
+      <td>{{ec.Stream_Allocated}}</td>
+      <td>
+          <a class="btn btn-success btn-sm" href="/editstudent/{{ec.Sno}}"><i class="fa fa-edit"></i></a>
+          <a class="btn btn-danger btn-sm"  href="/deletestudent/{{ec.Sno}}"><i class="fa fa-trash"></i></a>
+
+
+      </td>
+    </tr>
+
+
+
+<!-- Modal -->
+
+   {% endfor %}
+
+
+
+
+  </tbody>
+</table>
+     </div>
+
+  </body>
+  {% endblock %}
